@@ -1,0 +1,277 @@
+openapi: 3.0.1
+info:
+  title: API de Informações Cadastrais
+  description: 'API para buscar informações cadastradas de prestadores e associados.'
+  version: 1.0.0
+tags:
+- name: "user"
+  description: "Tudo sobre prestadores e associados"
+- name: "hospital"
+  description: "Tudo sobre hospitais"
+paths:
+  /users:
+    get:
+      tags:
+      - "user"
+      operationId: "findUsers"
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+  /users/prestador:
+    get:
+      tags:
+      - "user"
+      operationId: "findPrestadores"
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+  /users/associado:
+    get:
+      tags:
+      - "user"
+      operationId: "findAssociados"
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+  /users/prestador/{id}:
+    get:
+      tags:
+      - "user"
+      operationId: "findPrestador"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "Ok"
+          content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Prestador não encontrado"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+    put:
+      tags:
+      - "user"
+      operationId: "editPrestador"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: "Ok"
+          content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Prestador não encontrado"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+  /users/associado/{id}:
+    get:
+      tags:
+      - "user"
+      operationId: "findAssociado"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "Ok"
+          content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Associado não encontrado"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+    put:
+      tags:
+      - "user"
+      operationId: "editAssociado"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: "Ok"
+          content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Associado não encontrado"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+  /hospitais:
+    get:
+      tags:
+      - "hospital"
+      operationId: "findHospitais"
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+  /hospitais/{id}:
+    get:
+      tags:
+      - "hospital"
+      operationId: "findHospital"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Hospital não encontrado"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+    put:
+      tags:
+      - "hospital"
+      operationId: "editHospital"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hospital'
+      responses:
+        "200":
+          description: "Ok"
+          content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Hospital não encontrado"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+components:
+  schemas:
+    User:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        tipo:
+          type: "string"
+        plano:
+          type: "string"
+        categoria:
+          type: "string"
+        nome:
+          type: "string"
+        cargo:
+          type: "string"
+        telefone:
+          type: "string"
+        localizacao:
+          type: "string"
+        formacao:
+          type: "string"
+    Hospital:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        nome:
+          type: "string"
+        endereco:
+          $ref: "#/components/schemas/Endereco"
+        telefone:
+          type: "string"
+        localizacao:
+          type: "string"
+    Endereco:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        logradouro:
+          type: "string"
+        numero:
+          type: "integer"
+          format: "int32"
+        bairro:
+          type: "string"
+        cidade:
+          type: "string"
+        estado:
+          type: "string"
+        pais:
+          type: "string"
+          
+          
