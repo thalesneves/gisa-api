@@ -1,0 +1,134 @@
+openapi: 3.0.1
+info:
+  title: API de Serviços ao Associado
+  description: 'API para buscar fluxos BPMs cadastrados.'
+  version: 1.0.0
+tags:
+- name: "file"
+  description: "Tudo sobre fluxos BPMs"
+paths:
+  /servicosassociado:
+    get:
+      tags:
+      - "file"
+      operationId: "getAllFiles"
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+  /servicosassociado/uploadfile:
+    post:
+      tags:
+      - "file"
+      operationId: "uploadFile"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+      responses:
+        "201":
+          description: "201 response"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+  /servicosassociado/downloadfile/{id}:
+    get:
+      tags:
+      - "file"
+      operationId: "downloadFile"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Prestador não encontrado"
+          content: {}          
+        "500":
+          description: "Erro inesperado"
+          content: {}
+  /servicosassociado/{id}:
+    delete:
+      tags:
+      - "file"
+      operationId: "delete"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Prestador não encontrado"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+    put:
+      tags:
+      - "file"
+      operationId: "edit"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Prestador não encontrado"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+security:
+- auth: []
+components:
+  schemas:
+    File:
+      type: "object"
+      properties:
+        content:
+          type: "string"
+          format: "byte"
+        flowName:
+          type: "string"
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      
