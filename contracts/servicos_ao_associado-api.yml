@@ -6,6 +6,8 @@ info:
 tags:
 - name: "file"
   description: "Tudo sobre fluxos BPMs"
+servers:
+- url: http://localhost:11506
 paths:
   /servicosassociado:
     get:

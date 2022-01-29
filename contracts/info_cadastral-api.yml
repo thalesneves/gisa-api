@@ -6,6 +6,8 @@ info:
 tags:
 - name: "user"
   description: "Tudo sobre prestadores e associados"
+servers:
+- url: http://localhost:11506
 paths:
   /infocadastral/users:
     get:
