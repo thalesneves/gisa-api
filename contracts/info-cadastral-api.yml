@@ -151,7 +151,7 @@ paths:
         "500":
           description: "Erro inesperado"
           content: {}
-  /hospitais:
+  /hospitals:
     get:
       tags:
       - "hospital"
@@ -163,7 +163,7 @@ paths:
         "500":
           description: "Erro inesperado"
           content: {}
-  /hospitais/{id}:
+  /hospitals/{id}:
     get:
       tags:
       - "hospital"
