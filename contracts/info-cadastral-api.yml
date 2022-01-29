@@ -216,6 +216,8 @@ paths:
         "500":
           description: "Erro inesperado"
           content: {}
+security:
+- auth: []
 components:
   schemas:
     User:
@@ -273,5 +275,9 @@ components:
           type: "string"
         pais:
           type: "string"
-          
-          
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      
