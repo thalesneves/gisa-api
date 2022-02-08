@@ -13,7 +13,7 @@ paths:
     get:
       tags:
       - "user"
-      operationId: "findUsers"
+      operationId: "findAll"
       responses:
         "200":
           description: "200 response"
@@ -21,26 +21,115 @@ paths:
         "500":
           description: "Erro inesperado"
           content: {}
-  /infocadastral/users/prestador:
+  /infocadastral/users/{tipo}:
     get:
       tags:
       - "user"
-      operationId: "findPrestadores"
+      operationId: "findByTipo"
+      parameters:
+      - name: "tipo"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
         "200":
           description: "200 response"
           content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Tipo não encontrado"
+          content: {}          
         "500":
           description: "Erro inesperado"
           content: {}
-  /infocadastral/users/associado:
+  /infocadastral/users/filter:
     get:
       tags:
       - "user"
       operationId: "findAssociados"
+      parameters:
+      - in: "query"
+        name: cargo
+        schema:
+          type: "string"
+        required: true
       responses:
         "200":
           description: "200 response"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+  /infocadastral/user:
+    post:
+      tags:
+      - "user"
+      operationId: "save"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "201":
+          description: "201 response"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+  /infocadastral/user/{id}:
+    put:
+      tags:
+      - "user"
+      operationId: "edit"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Prestador não encontrado"
+          content: {}
+        "500":
+          description: "Erro inesperado"
+          content: {}
+    delete:
+      tags:
+      - "user"
+      operationId: "delete"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+        "400":
+          description: "Id fornecido inválido"
+          content: {}
+        "404":
+          description: "Prestador não encontrado"
           content: {}
         "500":
           description: "Erro inesperado"
@@ -53,4 +142,24 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      
+  schemas:
+    User:
+      type: "object"
+      properties:
+        tipo:
+          type: "string"
+        plano:
+          type: "string"
+        categoria:
+          type: "string"
+        nome:
+          type: "string"
+        cargo:
+          type: "string"
+        telefone:
+          type: "string"
+        localizacao:
+          type: "string"
+        formacao:
+          type: "string"
+          
